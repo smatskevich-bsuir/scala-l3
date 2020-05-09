@@ -4,20 +4,38 @@ import scala.util.Random
 object Lab3 {
     def main(args: Array[String]) {
         val bsuir = new University();
-        val ivan = bsuir.addStudent("Ivan", 6)
-        val petr = bsuir.addStudent("Petr", 7)
-        
-        println(s"Ivan id is $ivan")
-        println(s"Petr id is $petr")
+        var inp = ' '
 
-        println("Ivan visited university?")
-        println(bsuir.visit(ivan))
+        println("1 - Add student")
+        println("2 - Visit university")
 
-        println("Petr visited university?")
-        println(bsuir.visit(petr))
-
-        println("Random visited university?")
-        println(bsuir.visit(new Random().nextInt()))
+        do
+        {
+            inp = Console.readChar()
+            inp match {
+                case '1' => {
+                    println("Enter student name")
+                    val name = Console.readLine()
+                    println("Enter student score")
+                    val score = Console.readDouble()
+                    val id = bsuir.addStudent(name, score)
+                    println(s"Added student $name with score = $score, id = $id")
+                }
+                case '2' => {
+                    println("Enter student id")
+                    val id = Console.readInt()
+                    val res = bsuir.visit(id)
+                    println(s"Visited university witd id = $id? $res")
+                }
+                case 'q' => Nil
+                case _ => {
+                    println("Bad input. Use:")
+                    println("1 - Add student")
+                    println("2 - Visit university")
+                }
+            }
+        }
+        while(inp != 'q')
     }
 }
 
